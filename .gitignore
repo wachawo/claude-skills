@@ -25,6 +25,12 @@ dist/
 build/
 *.egg-info/
 
+# Coverage artifacts (pytest-cov output)
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
 # Virtual Environments
 .venv/
 venv/

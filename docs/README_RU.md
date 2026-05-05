@@ -1,16 +1,19 @@
 ## claude-skills
 
 [![CI](https://github.com/wachawo/claude-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/wachawo/claude-skills/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/wachawo/claude-skills/branch/main/graph/badge.svg)](https://codecov.io/gh/wachawo/claude-skills?branch=main)
 [![PyPI](https://img.shields.io/pypi/v/claude-skills.svg)](https://pypi.org/project/claude-skills/)
 [![Downloads](https://img.shields.io/pypi/dm/claude-skills.svg)](https://pypi.org/project/claude-skills/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wachawo/claude-skills/blob/main/LICENSE)
 [![Python](https://img.shields.io/pypi/pyversions/claude-skills.svg)](https://pypi.org/project/claude-skills/)
 
-Каталог скиллов в [`../skills/`](../skills/) плюс небольшой mc-style
-инсталлер (`claude-skills`), который копирует выбранные скиллы в
-`~/.claude/skills/` (на всю машину) или `./.claude/skills/` (только в
-текущем проекте). Каждый скилл с оценкой полезности и мини-обзором,
-отсортировано от самого полезного к самому ситуативному.
+Claude Skills для инженеров и разработчиков любого стека — готовая коллекция практичных скиллов, которые превращают Claude в сильного технического напарника.
+
+В этом репозитории собраны скиллы для повседневной инженерной работы: **разработка**, **Python-тулинг**, **архитектура**, **DevOps**, **ревью кода**, **отладка**, **безопасность**, **browser-автоматизация**, **анализ данных** и **продуктивная работа с проектами**. Выберите нужные скиллы и установите их локально для проекта или глобально для всей машины за пару команд.
+
+Каждый скилл — это не просто промпт, а рабочий инструмент, который помогает Claude лучше понимать задачи разработчика, писать чище код, быстрее разбираться в проектах и увереннее помогать в инженерных решениях.
+
+Нашли сильный скилл или достойный репозиторий? Не стесняйтесь добавлять его в эту коллекцию через Pull Request — вместе соберём лучший набор Claude Skills для реальной разработки.
 
 [English](../README.md) | **[Русский](README_RU.md)**
 
@@ -107,8 +110,9 @@ Apply (отовсюду, где найден). Пустые директории
 | `skills/<name>/SKILL.md` (+ ресурсы) | Сами скиллы — по папке на скилл, подхватываются Claude Code. |
 | `claude-skills.py` (в корне) | Тонкая обёртка, чтобы `python3 claude-skills.py` работал из свежего clone без `pip install`. |
 | `INSTALL.md` | Подробный гайд по установке, клавишам, флагам, перемещению/удалению. |
+| `tests/` | Набор pytest — 27 тестов на чистые функции (`truncate`, `aggregate_skill`, `build_rows`, `wrap_lines`) и работу с ФС (`md5_file`, `find_installed`, `assess`, `cleanup_empty_dirs`). Запускается через `pip install -e ".[dev]" && pytest`. |
 | `.github/workflows/publish.yml` | На push тэга `vX.Y.Z`: собирает sdist + wheel и публикует в PyPI через trusted publishing (OIDC). |
-| `.github/workflows/ci.yml` | На каждый push / PR: валидирует структуру скиллов, компилирует скрипт, собирает пакет. |
+| `.github/workflows/ci.yml` | На каждый push / PR: валидирует структуру скиллов, прогоняет pytest с покрытием, заливает в Codecov, собирает пакет. |
 
 ### Релиз
 
