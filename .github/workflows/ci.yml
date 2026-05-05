@@ -1,0 +1,37 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify skills layout
+        run: |
+          test -d skills
+          shopt -s nullglob
+          skills=(skills/*/SKILL.md)
+          if [ "${#skills[@]}" -eq 0 ]; then
+            echo "no skills/<name>/SKILL.md found"; exit 1
+          fi
+          echo "Found ${#skills[@]} skills."
+
+      - name: Compile installer
+        run: python3 -m py_compile src/claude_skills/cli.py claude-skills.py
+
+      - name: Build sdist + wheel
+        run: |
+          python -m pip install --upgrade build twine
+          python -m build
+          ls -lh dist/
+          twine check dist/*

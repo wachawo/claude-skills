@@ -3,42 +3,44 @@
 `claude-skills` is a directory of Claude Code skills plus a small interactive
 installer (`claude-skills.py`). Pick one of the install paths below.
 
-> Replace `OWNER/REPO` with the actual GitHub coordinates of this repository.
-
-## 1. Install from a GitHub Release (recommended)
-
-Each tagged release attaches `claude-skills-<tag>.tar.gz` and `.zip`. Download,
-unpack, run:
+## 1. From PyPI
 
 ```bash
-REPO=OWNER/REPO
-TAG=v0.2.0
-curl -fsSL "https://github.com/${REPO}/releases/download/${TAG}/claude-skills-${TAG}.tar.gz" \
-  | tar -xz
-cd "claude-skills-${TAG}"
-python3 claude-skills.py
+pip install claude-skills
+claude-skills
 ```
 
-With the GitHub CLI:
+The package bundles the skill catalog. The console script `claude-skills`
+opens the curses picker; the LOCAL destination resolves against your current
+working directory (`./.claude/skills/`).
+
+`pipx` works the same way:
 
 ```bash
-gh release download v0.2.0 --repo OWNER/REPO --pattern '*.tar.gz'
-tar -xzf claude-skills-v0.2.0.tar.gz
-cd claude-skills-v0.2.0
-python3 claude-skills.py
+pipx install claude-skills
+claude-skills
 ```
 
-## 2. Install from source (latest `main`)
+## 2. From source (`git clone`)
 
 ```bash
-git clone https://github.com/OWNER/REPO.git
-cd REPO
+git clone https://github.com/wachawo/claude-skills.git
+cd claude-skills
+pip install -e .
+claude-skills
+```
+
+Or zero-install — the repo ships a thin entry point at the root:
+
+```bash
+git clone https://github.com/wachawo/claude-skills.git
+cd claude-skills
 python3 claude-skills.py
 ```
 
 ## Using the installer
 
-`claude-skills.py` opens an mc-style picker. Skills already installed appear at
+`claude-skills` opens an mc-style picker. Skills already installed appear at
 the top. Two-pane layout: file tree on the left, diff against the installed
 copy on the right.
 
@@ -70,8 +72,8 @@ machine-wide).
 Pass a destination flag and the destination prompt is skipped:
 
 ```bash
-python3 claude-skills.py --user    # apply to ~/.claude/skills
-python3 claude-skills.py --local   # apply to ./.claude/skills
+claude-skills --user      # apply to ~/.claude/skills
+claude-skills --local     # apply to ./.claude/skills
 ```
 
 The TUI still opens — flags only preselect the destination for the apply step.
@@ -93,8 +95,7 @@ empty skill directories are cleaned up.
 
 ## What ends up on disk
 
-For each selected `skills/<name>/...` file, the installer copies it to
-`<destination>/<name>/<same path>`:
+For each selected skill, files are copied to `<destination>/<name>/<same path>`:
 
 ```
 ~/.claude/skills/<name>/SKILL.md
@@ -113,23 +114,20 @@ LOCAL skills only inside the project directory.
 
 ## Requirements
 
-- Python 3.10+ (uses `pathlib`, f-strings, modern type hints; no third-party
-  deps).
-- A real terminal (`curses`). Running over a pipe / non-tty session exits with
-  an error.
+- Python ≥ 3.10 (modern type hints, f-strings).
+- A real terminal (`curses`). Running over a pipe / non-tty session exits
+  with an error.
+- No third-party dependencies — the installer uses only the standard library
+  (`curses`, `pathlib`, `hashlib`, `difflib`, `shutil`).
 
-## Building a release locally
-
-If you want to build the same archive the workflow produces:
+## Releasing (maintainer)
 
 ```bash
-VERSION=v0.2.0
-NAME="claude-skills-${VERSION}"
-mkdir -p "dist/${NAME}"
-cp -r skills "dist/${NAME}/"
-cp claude-skills.py README.md INSTALL.md "dist/${NAME}/"
-tar -czf "dist/${NAME}.tar.gz" -C dist "${NAME}"
+git tag v0.0.1
+git push --tags
 ```
 
-The GitHub workflow (`.github/workflows/release.yml`) does exactly this on
-every `v*` tag push and attaches the archive to the matching GitHub Release.
+The `publish` workflow (`.github/workflows/publish.yml`) runs on the tag,
+builds sdist + wheel via `python -m build`, runs `twine check`, and publishes
+to PyPI via [trusted publishing](https://docs.pypi.org/trusted-publishers/)
+(no API token needed; configure once on pypi.org).
