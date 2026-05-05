@@ -1,5 +1,11 @@
 ## claude-skills
 
+[![CI](https://github.com/wachawo/claude-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/wachawo/claude-skills/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/claude-skills.svg)](https://pypi.org/project/claude-skills/)
+[![Downloads](https://img.shields.io/pypi/dm/claude-skills.svg)](https://pypi.org/project/claude-skills/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wachawo/claude-skills/blob/main/LICENSE)
+[![Python](https://img.shields.io/pypi/pyversions/claude-skills.svg)](https://pypi.org/project/claude-skills/)
+
 Каталог скиллов в [`../skills/`](../skills/) плюс небольшой mc-style
 инсталлер (`claude-skills`), который копирует выбранные скиллы в
 `~/.claude/skills/` (на всю машину) или `./.claude/skills/` (только в

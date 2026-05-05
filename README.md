@@ -1,5 +1,11 @@
 ## claude-skills
 
+[![CI](https://github.com/wachawo/claude-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/wachawo/claude-skills/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/claude-skills.svg)](https://pypi.org/project/claude-skills/)
+[![Downloads](https://img.shields.io/pypi/dm/claude-skills.svg)](https://pypi.org/project/claude-skills/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wachawo/claude-skills/blob/main/LICENSE)
+[![Python](https://img.shields.io/pypi/pyversions/claude-skills.svg)](https://pypi.org/project/claude-skills/)
+
 Skill catalog in [`skills/`](skills/) plus a small mc-style installer
 (`claude-skills`) that copies the ones you pick into `~/.claude/skills/`
 (machine-wide) or `./.claude/skills/` (project-local). Each entry has a
