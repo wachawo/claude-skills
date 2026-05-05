@@ -1,0 +1,33 @@
+# IDE
+.idea/
+.vscode/
+.cursor/
+.claude/
+.codex
+*.iml
+
+# Environments
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+.venv/
+venv/
+
+data/
+# OS
+.DS_Store
+Thumbs.db
+
+
+

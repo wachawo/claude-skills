@@ -1,0 +1,5 @@
+# install-skills.py uses only the Python standard library — no runtime deps.
+#
+# Individual skill scripts under skills/*/scripts/ may require third-party
+# packages (e.g. pandas, numpy, openpyxl, pypdf, playwright, anthropic, mcp).
+# Install them per skill as needed.
