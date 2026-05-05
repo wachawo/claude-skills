@@ -7,6 +7,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wachawo/claude-skills/blob/main/LICENSE)
 [![Python](https://img.shields.io/pypi/pyversions/claude-skills.svg)](https://pypi.org/project/claude-skills/)
 
+**[English](README.md)** | [Русский](docs/README_RU.md)
+
 Claude Skills for software engineers and developers across the stack — a curated collection of practical skills that turns Claude into a powerful technical teammate.
 
 This repository brings together high-value skills for everyday engineering work: **software development**, **Python tooling**, **architecture**, **DevOps**, **code review**, **debugging**, **security**, **browser automation**, **data analysis**, and **project workflows**. Pick the skills you need and install them globally or per project in just a few commands.
@@ -14,8 +16,6 @@ This repository brings together high-value skills for everyday engineering work:
 Each skill is more than just a prompt — it is a ready-to-use workflow that helps Claude better understand developer tasks, write cleaner code, navigate codebases faster, and support stronger engineering decisions.
 
 Found a powerful skill or a repository worth sharing? Feel free to add it to this collection via Pull Request — together, we can build the best Claude Skills toolkit for real-world development.
-
-**[English](README.md)** | [Русский](docs/README_RU.md)
 
 ![docs/image.png](docs/image.png)
 
