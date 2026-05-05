@@ -71,10 +71,13 @@ Picker keys:
 
 | Key | Action |
 |---|---|
-| `↑` / `↓` | Move cursor |
-| `←` / `→` | Collapse / expand a skill |
-| `Shift+↑` / `Shift+↓` | Scroll diff pane |
-| `space` | Toggle selection |
+| `Tab` | Switch focus between skill list (left) and diff pane (right) |
+| `↑` / `↓` | Focus left: move cursor. Focus right: scroll diff one line. |
+| `PgUp` / `PgDn` | Same dispatch by focus, page-sized step |
+| `Home` / `End` | Same dispatch by focus, jump to top / bottom |
+| `←` / `→` | Collapse / expand a skill (left focus only) |
+| `Shift+↑` / `Shift+↓` | Scroll diff pane (works in any focus) |
+| `space` | Toggle the whole skill — selection is per-skill, never per-file |
 | `a` / `n` | Select all / none |
 | `enter` | Apply (then choose USER or LOCAL) |
 | `q` | Quit without changes |
@@ -90,8 +93,10 @@ When you apply with USER as the destination and the same file is already in
 LOCAL, the LOCAL copy is removed after the USER copy is written (one-way
 LOCAL → USER move). Reverse direction never auto-deletes from USER.
 
-Unticking a previously installed file marks it for removal on apply (from any
-location it was found in). Empty skill directories are cleaned up.
+Unticking a previously installed skill marks all its files for removal on
+apply (from any location they were found in). Selection is at skill level —
+expanding a skill is for browsing the per-file diff, not for picking
+individual files. Empty skill directories are cleaned up.
 
 ### Components
 

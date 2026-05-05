@@ -313,12 +313,25 @@ def run(stdscr, entries):
     init_colors()
     stdscr.keypad(True)
 
+    # Skill -> list of entry indices, used for skill-level selection.
+    by_skill = {}
+    for i, e in enumerate(entries):
+        skill = e["rel"].split("/", 1)[0]
+        by_skill.setdefault(skill, []).append(i)
+
+    # Initial selection at skill level: pre-select any skill with at least
+    # one already-installed file (anything not STATE_NEW).
+    selected = set()
+    for skill, idxs in by_skill.items():
+        if any(entries[i]["state"] != STATE_NEW for i in idxs):
+            selected.update(idxs)
+
     expanded    = set()
     rows        = build_rows(entries, expanded)
-    selected    = {i for i, e in enumerate(entries) if e["state"] != STATE_NEW}
     cursor      = 0
     diff_offset = 0
     view_start  = 0
+    focus       = "left"   # "left" = skill list, "right" = diff pane
 
     while True:
         h, w = stdscr.getmaxyx()
@@ -334,7 +347,9 @@ def run(stdscr, entries):
 
         stdscr.erase()
 
-        title = f" Install skills   {len(entries)} files,  {len(selected)} selected   (destination chosen on Apply) "
+        focus_marker = "[tab -> diff]" if focus == "left" else "[tab -> skills]"
+        title = (f" Install skills   {len(entries)} files,  "
+                 f"{len(selected)} selected   {focus_marker} ")
         stdscr.addstr(0, 0, truncate(title.ljust(w), w),
                       curses.color_pair(C_HEADER) | curses.A_BOLD)
 
@@ -357,6 +372,7 @@ def run(stdscr, entries):
             else:
                 e = entries[row["idx"]]
                 state = e["state"]
+                # File-level checkbox mirrors the parent skill — no per-file toggle.
                 check = "[x]" if row["idx"] in selected else "[ ]"
                 if state == STATE_DIFF:
                     tag = f"updated +{e['plus']} -{e['minus']}"
@@ -421,8 +437,12 @@ def run(stdscr, entries):
         stdscr.addstr(bottom, 0, truncate(sb.ljust(w), w),
                       curses.color_pair(C_HEADER))
 
-        hint = (" up/down move   left/right collapse/expand   shift+up/down scroll diff   "
-                "space toggle   a all   n none   enter apply   q quit ")
+        if focus == "left":
+            hint = (" tab: focus diff   up/down move   left/right collapse/expand   "
+                    "space toggle skill   a all   n none   enter apply   q quit ")
+        else:
+            hint = (" tab: focus skills   up/down scroll diff   pgup/pgdn page   "
+                    "home/end top/bottom   q quit ")
         try:
             stdscr.addstr(h - 1, 0, truncate(hint.ljust(w - 1), w - 1),
                           curses.color_pair(C_HINT))
@@ -434,48 +454,57 @@ def run(stdscr, entries):
 
         if key == ord('q'):
             return None
+        elif key in (9, curses.KEY_BTAB):
+            focus = "right" if focus == "left" else "left"
         elif key in (curses.KEY_UP, ord('k')):
-            cursor = max(0, cursor - 1)
-            diff_offset = 0
+            if focus == "left":
+                cursor = max(0, cursor - 1)
+                diff_offset = 0
+            else:
+                diff_offset = max(0, diff_offset - 1)
         elif key in (curses.KEY_DOWN, ord('j')):
-            cursor = min(len(rows) - 1, cursor + 1)
-            diff_offset = 0
+            if focus == "left":
+                cursor = min(len(rows) - 1, cursor + 1)
+                diff_offset = 0
+            else:
+                diff_offset += 1
         elif key == curses.KEY_PPAGE:
-            cursor = max(0, cursor - body_h)
-            diff_offset = 0
+            if focus == "left":
+                cursor = max(0, cursor - body_h)
+                diff_offset = 0
+            else:
+                diff_offset = max(0, diff_offset - body_h)
         elif key == curses.KEY_NPAGE:
-            cursor = min(len(rows) - 1, cursor + body_h)
-            diff_offset = 0
+            if focus == "left":
+                cursor = min(len(rows) - 1, cursor + body_h)
+                diff_offset = 0
+            else:
+                diff_offset += body_h
         elif key == curses.KEY_HOME:
-            cursor = 0
+            if focus == "left":
+                cursor = 0
             diff_offset = 0
         elif key == curses.KEY_END:
-            cursor = len(rows) - 1
-            diff_offset = 0
-        elif key == ord(' '):
-            cur_row = rows[cursor]
-            if cur_row["type"] == "skill":
-                files   = cur_row["files"]
-                all_sel = all(i in selected for i in files)
-                if all_sel:
-                    for i in files:
-                        selected.discard(i)
-                else:
-                    for i in files:
-                        selected.add(i)
+            if focus == "left":
+                cursor = len(rows) - 1
+                diff_offset = 0
             else:
-                idx = cur_row["idx"]
-                if idx in selected:
-                    selected.remove(idx)
-                else:
-                    selected.add(idx)
-        elif key in (curses.KEY_RIGHT, ord('l')):
+                diff_offset = max_off
+        elif key == ord(' '):
+            # Always toggles the whole skill — even on file rows.
+            target_skill = rows[cursor]["skill"]
+            files = by_skill[target_skill]
+            if all(i in selected for i in files):
+                selected.difference_update(files)
+            else:
+                selected.update(files)
+        elif key in (curses.KEY_RIGHT, ord('l')) and focus == "left":
             cur_row = rows[cursor]
             if cur_row["type"] == "skill" and cur_row["skill"] not in expanded:
                 expanded.add(cur_row["skill"])
                 rows = build_rows(entries, expanded)
                 diff_offset = 0
-        elif key in (curses.KEY_LEFT, ord('h')):
+        elif key in (curses.KEY_LEFT, ord('h')) and focus == "left":
             cur_row = rows[cursor]
             target  = cur_row["skill"]
             if cur_row["type"] == "file" or target in expanded:

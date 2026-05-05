@@ -48,10 +48,13 @@ Keys:
 
 | Key | Action |
 |---|---|
-| `↑` / `↓` | Move cursor |
-| `←` / `→` | Collapse / expand a skill |
-| `Shift+↑` / `Shift+↓` | Scroll diff pane |
-| `space` | Toggle selection (file or whole skill) |
+| `Tab` | Switch focus between skill list (left) and diff pane (right) |
+| `↑` / `↓` | Focus left: move cursor. Focus right: scroll diff one line. |
+| `PgUp` / `PgDn` | Same dispatch by focus, page-sized step |
+| `Home` / `End` | Same dispatch by focus, jump to top / bottom |
+| `←` / `→` | Collapse / expand a skill (left focus only) |
+| `Shift+↑` / `Shift+↓` | Scroll diff pane (works in any focus) |
+| `space` | Toggle the whole skill — selection is per-skill, never per-file |
 | `a` / `n` | Select all / none |
 | `enter` | Apply (then choose USER or LOCAL destination) |
 | `q` | Quit without changes |
@@ -89,9 +92,10 @@ exists installs into LOCAL and leaves the USER copy untouched.
 
 ## Uninstall
 
-Run the picker, untick the skills you want gone, press `enter`. Each unticked
-file is removed from every location it was found in (LOCAL and/or USER), and
-empty skill directories are cleaned up.
+Run the picker, untick the skills you want gone (selection is at skill level
+— pressing `space` on any row toggles the whole skill), press `enter`. Each
+unticked skill is removed from every location its files were found in (LOCAL
+and/or USER), and empty skill directories are cleaned up.
 
 ## What ends up on disk
 
