@@ -1,5 +1,5 @@
 ---
-name: "sec-review"
+name: "review-security"
 description: "Perform language- and framework-specific security best-practice reviews and propose improvements. Activate only when the user explicitly requests security best-practice guidance, a security review/report, or help writing secure-by-default code. Activate only for supported languages (python, javascript/typescript, go). Do not activate for general code review, debugging, or tasks unrelated to security."
 ---
 
@@ -43,7 +43,18 @@ Although these references contain security best practices for languages and fram
 
 # Report Format
 
-When preparing a report, you must write it as a markdown file at the path `security_best_practices_report.md` or another location specified by the user. You may ask the user where they would like the report written.
+## Output File Naming
+
+The result of a security review MUST be written to a markdown file named `REVIEW-SECURITY.md` (uppercase, hyphenated). This is the canonical filename for the output of this skill.
+
+- Default location: project root (`./REVIEW-SECURITY.md`).
+- If multiple reviews are produced over time, suffix with an ISO date: `REVIEW-SECURITY-2026-05-14.md`.
+- If the review targets a specific subproject/package, place it at that subproject's root (e.g. `api/REVIEW-SECURITY.md`).
+- The user may override the location, but the filename `REVIEW-SECURITY.md` (or its dated variant) MUST be preserved so the artifact is easy to discover by convention.
+
+Do not use legacy names like `security_best_practices_report.md`, `security-report.md`, or `SECURITY_REVIEW.md` — always use `REVIEW-SECURITY.md`.
+
+## Report Structure
 
 The report should begin with a brief executive summary.
 

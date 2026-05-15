@@ -216,9 +216,9 @@ API-токен не нужен).
 
 Структурированный воркфлоу для написания документации, спеков, decision-doc'ов с итеративной проработкой и проверкой «работает ли это для читателя». Лучше, чем просить LLM «напиши доку».
 
-#### [/sec-review](../skills/sec-review/SKILL.md) — 8.0
+#### [/review-security](../skills/review-security/SKILL.md) — 8.0
 
-Security review для Python/JS/TS/Go с конкретными улучшениями. Запускается явно — не для общего ревью, а именно для секьюрити-прохода.
+Security review для Python/JS/TS/Go с конкретными улучшениями. Запускается явно — не для общего ревью, а именно для секьюрити-прохода. Результат пишется в `REVIEW-SECURITY.md`.
 
 #### [/webapp-testing](../skills/webapp-testing/SKILL.md) — 8.0
 
@@ -247,3 +247,31 @@ Husky + lint-staged + Prettier + типы + тесты на pre-commit. Запу
 #### [/pdf](../skills/pdf/SKILL.md) — 7.5
 
 Полный набор для PDF: чтение, мердж, сплит, формы, водяные знаки, OCR. Узкая, но мощная утилита под конкретный формат.
+
+#### [/ui-ux-pro-max](../skills/ui-ux-pro-max/SKILL.md) — 8.5
+
+UI/UX-design intelligence для веба и мобайла: 50+ стилей, 161 цветовая палитра, 57 шрифтовых пар, 99 UX-гайдлайнов, 25 типов графиков — на 10 стеках (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, чистый HTML/CSS). Зонтичный скилл, оркестрирует остальные из набора. Из репозитория [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill).
+
+#### [/design](../skills/design/SKILL.md) — 8.0
+
+Сводный design-скилл: бренд-идентика, design tokens, генерация логотипов (55 стилей через Gemini), corporate identity program (50 артефактов, CIP-мокапы), HTML-презентации с Chart.js, баннеры (22 стиля), иконки (15 стилей, SVG), social photos. Производство визуала под ключ. Из того же репо.
+
+#### [/ui-styling](../skills/ui-styling/SKILL.md) — 8.0
+
+shadcn/ui + Tailwind utility-first: доступные компоненты (диалоги, dropdown'ы, формы, таблицы), темы/dark-mode, адаптивные раскладки, canvas-визуал. Тяжёлая папка `canvas-fonts/` (54 ttf, 5.5 МБ) при импорте удалена — донесите шрифты сами, если нужен canvas-рендер. Из того же репо.
+
+#### [/design-system](../skills/design-system/SKILL.md) — 7.5
+
+Трёхслойная token-архитектура (primitive → semantic → component): CSS-переменные, шкалы spacing/typography, спеки компонентов, brand-совместимая генерация слайдов. Для системного, token-driven дизайна. Из того же репо.
+
+#### [/brand](../skills/brand/SKILL.md) — 7.5
+
+Brand voice, визуальная идентика, messaging-фреймворки, управление ассетами, контроль консистентности. Подходит для брендированного контента, tone-of-voice, маркетинговых ассетов, проверки на соответствие style guide. Из того же репо.
+
+#### [/banner-design](../skills/banner-design/SKILL.md) — 7.5
+
+Баннеры для Facebook/Twitter/LinkedIn/YouTube/Instagram/Google Display, hero-секций сайтов, печати. Разные art-direction варианты (minimalist, gradient, glassmorphism, 3D, neon, duotone, editorial и др.). Из того же репо.
+
+#### [/slides](../skills/slides/SKILL.md) — 7.5
+
+Стратегические HTML-презентации с Chart.js, design tokens, адаптивными раскладками, copywriting-формулами, контекстными slide-стратегиями. Из того же репо.

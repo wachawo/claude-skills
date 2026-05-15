@@ -207,9 +207,9 @@ Extracts a DDD glossary from a conversation, flags ambiguities, suggests canonic
 
 A structured workflow for writing documentation, specs, and decision docs with iterative refinement and a "does this work for the reader" check. Better than just asking an LLM to "write docs".
 
-#### [/sec-review](skills/sec-review/SKILL.md) — 8.0
+#### [/review-security](skills/review-security/SKILL.md) — 8.0
 
-Security review for Python/JS/TS/Go with concrete improvements. Triggered explicitly — not for general code review, only for a security pass.
+Security review for Python/JS/TS/Go with concrete improvements. Triggered explicitly — not for general code review, only for a security pass. Output is written to `REVIEW-SECURITY.md`.
 
 #### [/webapp-testing](skills/webapp-testing/SKILL.md) — 8.0
 
@@ -238,3 +238,31 @@ Read/edit/create `.xlsx`/`.csv`/`.tsv`: formulas, formatting, charts, cleanup of
 #### [/pdf](skills/pdf/SKILL.md) — 7.5
 
 Full PDF toolkit: read, merge, split, forms, watermarks, OCR. Narrow but powerful for its specific format.
+
+#### [/ui-ux-pro-max](skills/ui-ux-pro-max/SKILL.md) — 8.5
+
+UI/UX design intelligence for web and mobile: 50+ styles, 161 color palettes, 57 font pairings, 99 UX guidelines, 25 chart types — across 10 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, plain HTML/CSS). The umbrella entry that orchestrates the rest of the bundle. From the [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) repository.
+
+#### [/design](skills/design/SKILL.md) — 8.0
+
+Comprehensive design skill: brand identity, design tokens, logo generation (55 styles via Gemini), corporate identity program (50 deliverables, CIP mockups), HTML presentations with Chart.js, banners (22 styles), icons (15 styles, SVG), social photos. End-to-end visual production. Same upstream.
+
+#### [/ui-styling](skills/ui-styling/SKILL.md) — 8.0
+
+shadcn/ui + Tailwind utility-first styling: accessible components (dialogs, dropdowns, forms, tables), theme/dark-mode customization, responsive layouts, canvas-based visual designs. Heavy upstream `canvas-fonts/` directory dropped at import — bring TTFs in if you need canvas font rendering. Same upstream.
+
+#### [/design-system](skills/design-system/SKILL.md) — 7.5
+
+Three-layer token architecture (primitive → semantic → component): CSS variables, spacing/typography scales, component specs, brand-compliant slide generation. For systematic, token-driven design. Same upstream.
+
+#### [/brand](skills/brand/SKILL.md) — 7.5
+
+Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone-of-voice work, marketing assets, style-guide enforcement. Same upstream.
+
+#### [/banner-design](skills/banner-design/SKILL.md) — 7.5
+
+Banners for Facebook/Twitter/LinkedIn/YouTube/Instagram/Google Display, website heroes, print. Multiple art-direction options (minimalist, gradient, glassmorphism, 3D, neon, duotone, editorial, etc.). Same upstream.
+
+#### [/slides](skills/slides/SKILL.md) — 7.5
+
+Strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, contextual slide strategies. Same upstream.

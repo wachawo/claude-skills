@@ -36,6 +36,8 @@ htmlcov/
 venv/
 
 data/
+!skills/**/data/
+
 # OS
 .DS_Store
 Thumbs.db
